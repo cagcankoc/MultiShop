@@ -1,0 +1,51 @@
+﻿@model List<ResultProductWithCategoryDto>
+
+@{
+    ViewData["Title"] = "ProductListWithCategory";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="chart-box">
+                <div class="bs-example" data-example-id="bordered-table">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Ad</th>
+                                <th>Fiyat</th>
+                                <th>Kategori</th>
+                                <th>Görsel</th>
+                                <th>Açıklama ve Bilgi</th>
+                                <th>Tüm Görseller</th>
+                                <th>Güncelle</th>
+                                <th>Sil</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                count++;
+                                <tr>
+                                    <th scope="row">@count</th>
+                                    <td>@item.Name</td>
+                                    <td>@item.Price</td>
+                                    <td>@item.Category.Name</td>
+                                    <td><img src="@item.ImageUrl" alt="" style="width: 50px;"></td>
+                                    <td><a href="/Admin/ProductDetail/UpdateProductDetail/@item.Id" class="btn btn-info">Açıklama ve Bilgi</a></td>
+                                    <td><a href="/Admin/ProductImage/UpdateProductImage/@item.Id" class="btn btn-info">Tüm Görseller</a></td>
+                                    <td><a href="/Admin/Product/UpdateProduct/@item.Id" class="btn btn-success">Güncelle</a></td>
+                                    <td><a href="/Admin/Product/DeleteProduct/@item.Id" class="btn btn-danger">Sil</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <a href="/Admin/Product/CreateProduct" class="btn btn-primary">Yeni Ürün Girişi</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

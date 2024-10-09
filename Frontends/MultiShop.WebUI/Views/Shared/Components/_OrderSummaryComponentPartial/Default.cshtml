@@ -1,0 +1,32 @@
+﻿@model BasketTotalDto
+
+<div class="bg-light p-30 mb-5">
+    <div class="border-bottom">
+        <h6 class="mb-3">Sipariş Listesi</h6>
+        @foreach (var item in Model.BasketItems)
+        {
+            decimal totalPricePerItem = item.Price * item.Quantity;
+
+            <div class="d-flex justify-content-between">
+                <p>@item.ProductName x @item.Quantity</p>
+                <h6>$@totalPricePerItem.ToString("N2")</h6>
+            </div>
+        }
+    </div>
+    <div class="border-bottom pt-3 pb-2">
+        <div class="d-flex justify-content-between mb-3">
+            <h6>Alışveriş Tutarı (Vergi dahil)</h6>
+            <h6>$@((Model.TotalPrice * 1.1m).ToString("N2"))</h6>@* // TODO: Add discount *@
+        </div>
+        <div class="d-flex justify-content-between">
+            <h6 class="font-weight-medium">Kargo Ücreti</h6>
+            <h6 class="font-weight-medium">$10</h6>
+        </div>
+    </div>
+    <div class="pt-2">
+        <div class="d-flex justify-content-between mt-2">
+            <h5>Genel Toplam</h5>
+            <h5>$@((Model.TotalPrice * 1.1m + 10).ToString("N2"))</h5>@* // TODO: Add discount *@
+        </div>
+    </div>
+</div>
